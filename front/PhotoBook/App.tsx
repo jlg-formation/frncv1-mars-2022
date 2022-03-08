@@ -17,6 +17,7 @@ import {
   useColorScheme,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import ErrorBoundary from './src/ErrorBoundaries';
 import Home from './src/routes/Home';
 
 const App = () => {
@@ -29,9 +30,11 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Home truc="titi">
-        <Text>Hello world</Text>
-      </Home>
+      <ErrorBoundary>
+        <Home truc="titi">
+          <Text>Hello world</Text>
+        </Home>
+      </ErrorBoundary>
     </SafeAreaView>
   );
 };

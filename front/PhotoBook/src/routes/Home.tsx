@@ -1,10 +1,22 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Text, View} from 'react-native';
 
 const Home: React.FC<{
   truc: string;
 }> = ({truc, children}) => {
   const [counter, setCounter] = useState(10);
+
+  useEffect(() => {
+    console.log('hello use effect');
+    return () => {
+      console.log('on destroy');
+    };
+  }, []);
+
+  if (counter > 15) {
+    throw new Error('oups. Counter is too big.');
+  }
+
   return (
     <View>
       <Text>{truc} works!</Text>
