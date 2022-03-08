@@ -36,7 +36,11 @@ const App = () => {
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <ErrorBoundary>
           <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator
+              initialRouteName={'Home'}
+              screenOptions={{
+                headerShown: false,
+              }}>
               <Stack.Screen name="Home" component={Home} />
               <Stack.Screen name="Login" component={Login} />
             </Stack.Navigator>
