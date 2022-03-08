@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 
 const Home: React.FC<{
   truc: string;
@@ -18,9 +25,22 @@ const Home: React.FC<{
   }
 
   return (
-    <View>
-      <Text>{truc} works!</Text>
-      <Text>counter: {counter} </Text>
+    <View style={styles.container}>
+      <TouchableHighlight
+        accessibilityLabel="un texte avec asdfasdf"
+        onPress={() => {
+          console.log('coucou');
+        }}>
+        <Text>{truc} works!</Text>
+      </TouchableHighlight>
+      <Text>
+        counter: <Text style={styles.bold}>{counter}</Text>{' '}
+      </Text>
+      <Image
+        style={styles.image}
+        source={require('../assets/logo.png')}
+        accessibilityLabel="image de counter"
+      />
       <Button
         title="Increment"
         onPress={() => {
@@ -37,6 +57,20 @@ const Home: React.FC<{
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    justifyContent: 'center',
+    padding: 10,
+  },
+  bold: {fontWeight: 'bold', fontSize: 40},
+  image: {
+    height: 50,
+    width: '100%',
+    resizeMode: 'contain',
+  },
+});
 
 const Toto: React.FC<{
   counter: number;
