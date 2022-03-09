@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   article: {
     marginBottom: 10,
     padding: 10,
+    paddingTop: 30,
     backgroundColor: 'white',
   },
   articleText: {
