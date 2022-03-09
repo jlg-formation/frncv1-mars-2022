@@ -4,8 +4,14 @@ import {
 } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
-  Home: undefined;
+  Home: {screen: keyof TabStackParamList};
   Login: undefined;
+};
+
+export type TabStackParamList = {
+  Wall: undefined;
+  Legal: undefined;
+  Settings: undefined;
 };
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();

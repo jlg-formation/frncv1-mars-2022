@@ -1,19 +1,27 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Icon} from 'react-native-elements';
+import {ScreenProps} from '../navigation';
+import {useAppSelector} from '../redux/hooks';
+import {selectAuthentication} from '../redux/slices/authentication.slice';
 import Legal from './Legal';
 import Settings from './Settings';
 import Wall from './Wall';
 
 const Tab = createBottomTabNavigator();
 
-const Home = () => {
-  console.log('homex');
+const Home = ({navigation}: ScreenProps<'Home'>) => {
+  const authentication = useAppSelector(selectAuthentication);
+  useEffect(() => {
+    if (authentication.user === undefined) {
+      navigation.navigate('Login');
+    }
+  }, [navigation, authentication]);
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
-        tabBarIcon: ({focused, color, size}) => {
+        tabBarIcon: ({color}) => {
           let name = '';
           switch (route.name) {
             case 'Wall':
