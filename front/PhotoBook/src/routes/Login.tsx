@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {Controller, useForm} from 'react-hook-form';
+import {StyleSheet, Text, View} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import {api} from '../api';
+import {Credentials} from '../interfaces/Credentials';
 import {ScreenProps} from '../navigation';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {
@@ -9,9 +11,6 @@ import {
   selectAuthentication,
   User,
 } from '../redux/slices/authentication.slice';
-
-import {useForm, Controller} from 'react-hook-form';
-import {Credentials} from '../interfaces/Credentials';
 
 const Login = ({navigation}: ScreenProps<'Login'>) => {
   const dispatch = useAppDispatch();
