@@ -25,8 +25,8 @@ const Login = ({navigation}: ScreenProps<'Login'>) => {
     formState: {errors},
   } = useForm({
     defaultValues: {
-      email: 'toto@toto.com',
-      password: 'qqq',
+      email: 'jlg@jlg.com',
+      password: '',
     } as Credentials,
   });
 
@@ -62,7 +62,8 @@ const Login = ({navigation}: ScreenProps<'Login'>) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <Text style={styles.title}>PhotoBook</Text>
       <Controller
         control={control}
         rules={{
@@ -109,6 +110,7 @@ const Login = ({navigation}: ScreenProps<'Login'>) => {
       />
 
       <Button
+        containerStyle={styles.button}
         title={'Connect'}
         onPress={handleSubmit(onSubmit)}
         loading={isLoading}
@@ -119,8 +121,23 @@ const Login = ({navigation}: ScreenProps<'Login'>) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
   input: {},
   error: {color: 'red'},
+  title: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    marginBottom: 50,
+  },
+  button: {
+    marginTop: 50,
+    width: '100%',
+  },
 });
 
 export default Login;
