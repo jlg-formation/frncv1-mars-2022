@@ -1,12 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Icon} from 'react-native-elements';
+import {StyleSheet, View} from 'react-native';
+import NewArticle from '../widgets/NewArticle';
 
 const Wall = () => {
   return (
     <View style={styles.container}>
-      <Text>Wall works!</Text>
-      <Icon name="cat" type="font-awesome-5" tvParallaxProperties={undefined} />
+      <NewArticle />
     </View>
   );
 };
