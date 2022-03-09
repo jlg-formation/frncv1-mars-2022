@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
-import {Button} from 'react-native-elements';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {Button, Input} from 'react-native-elements';
 import {api} from '../api';
 import {ScreenProps} from '../navigation';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
@@ -63,7 +63,51 @@ const Login = ({navigation}: ScreenProps<'Login'>) => {
 
   return (
     <View>
-      <Text>Login works!</Text>
+      <Controller
+        control={control}
+        rules={{
+          required: 'email required',
+          pattern: {
+            value: /\S+@\S+\.\S+/,
+            message: 'Entered value does not match email format',
+          },
+        }}
+        render={({field: {onChange, onBlur, value}}) => (
+          <Input
+            style={styles.input}
+            placeholder="Email"
+            errorStyle={styles.error}
+            errorMessage={errors.email && errors.email.message}
+            autoCompleteType={undefined}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="email"
+      />
+
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({field: {onChange, onBlur, value}}) => (
+          <Input
+            placeholder="Password"
+            errorStyle={styles.error}
+            errorMessage={errors.password && 'Text is required'}
+            autoCompleteType={undefined}
+            style={styles.input}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            secureTextEntry={true}
+          />
+        )}
+        name="password"
+      />
+
       <Button
         title={'Connect'}
         onPress={handleSubmit(onSubmit)}
@@ -73,5 +117,10 @@ const Login = ({navigation}: ScreenProps<'Login'>) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {},
+  error: {color: 'red'},
+});
 
 export default Login;
