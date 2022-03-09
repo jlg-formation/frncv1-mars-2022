@@ -19,17 +19,31 @@ import {
 import {ThemeProvider} from 'react-native-elements';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {Provider} from 'react-redux';
 import ErrorBoundary from './src/ErrorBoundaries';
 import {Stack} from './src/navigation';
+import {useAppSelector} from './src/redux/hooks';
+import {selectAuthentication} from './src/redux/slices/authentication.slice';
+import {store} from './src/redux/store';
 import Home from './src/routes/Home';
 import Login from './src/routes/Login';
 
 const App = () => {
+  return (
+    <Provider store={store}>
+      <ReduxApp />
+    </Provider>
+  );
+};
+
+const ReduxApp = () => {
   const isDarkMode = useColorScheme() === 'dark';
   console.log('truc truc truc');
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  const authentication = useAppSelector(selectAuthentication);
 
   return (
     <ThemeProvider>
@@ -39,7 +53,7 @@ const App = () => {
           <ErrorBoundary>
             <NavigationContainer>
               <Stack.Navigator
-                initialRouteName={'Home'}
+                initialRouteName={authentication.user ? 'Home' : 'Login'}
                 screenOptions={{
                   headerShown: false,
                 }}>
