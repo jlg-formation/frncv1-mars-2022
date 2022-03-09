@@ -12,7 +12,7 @@ const Wall = () => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'flex-start',
+    flex: 1,
   },
 });
 
