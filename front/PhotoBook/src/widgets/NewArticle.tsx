@@ -1,14 +1,25 @@
 import React, {useState} from 'react';
 import {Alert, Button, StyleSheet, TextInput, View} from 'react-native';
+import {api} from '../api';
 import {useAppSelector} from '../redux/hooks';
+import {Article} from '../redux/slices/articles.slice';
 import {selectAuthentication} from '../redux/slices/authentication.slice';
 
 const NewArticle = () => {
   const [text, setText] = useState('');
   const authentication = useAppSelector(selectAuthentication);
 
-  const submit = () => {
-    Alert.alert('coucou');
+  const submit = async () => {
+    try {
+      const article: Article = {
+        content: text,
+        images: [] as string[],
+      } as Article;
+      const response = await api.addNewArticle(article);
+      console.log('response: ', response);
+    } catch (err) {
+      console.log('err: ', err);
+    }
   };
   return (
     <View style={styles.container}>
