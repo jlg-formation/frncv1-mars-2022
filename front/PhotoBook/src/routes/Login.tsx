@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Button, Text, View} from 'react-native';
+import {ActivityIndicator, Text, View} from 'react-native';
+import {Button} from 'react-native-elements';
 import {api} from '../api';
 import {ScreenProps} from '../navigation';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
@@ -46,8 +47,7 @@ const Login = ({navigation}: ScreenProps<'Login'>) => {
   return (
     <View>
       <Text>Login works!</Text>
-      <Button title={'Connect'} onPress={onSubmit} />
-      {isLoading && <ActivityIndicator />}
+      <Button title={'Connect'} onPress={onSubmit} loading={isLoading} />
       {errorMessage !== '' && <Text>error: {errorMessage}</Text>}
     </View>
   );
